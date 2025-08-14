@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+    <book id="1">
+        <title>The Art of Document Processing</title>
+        <author>Jane Developer</author>
+        <year>2024</year>
+        <price>29.99</price>
+        <category>Technology</category>
+    </book>
+    <book id="2">
+        <title>Ballerina Programming Guide</title>
+        <author>John Coder</author>
+        <year>2024</year>
+        <price>39.99</price>
+        <category>Programming</category>
+    </book>
+    <book id="3">
+        <title>Data Processing with Apache Tika</title>
+        <author>Sarah Engineer</author>
+        <year>2023</year>
+        <price>34.99</price>
+        <category>Data Science</category>
+    </book>
+</bookstore>
