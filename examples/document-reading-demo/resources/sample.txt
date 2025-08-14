@@ -1,1 +1,21 @@
-Hello everytone
+DocReader Library - Text File Sample
+
+This is a sample plain text file for testing the DocReader library's text parsing capabilities.
+
+Key Features:
+- Supports multiple document formats
+- Uses Apache Tika for robust parsing
+- Extracts content, metadata, and file type information
+- Easy integration with Ballerina applications
+
+The DocReader library can process various document types including:
+• PDF documents
+• Microsoft Office files (Word, Excel, PowerPoint)
+• Web formats (HTML, XML)
+• Data formats (CSV, JSON)
+• Rich text documents (RTF)
+
+This text file demonstrates the library's ability to extract plain text content
+while preserving the document structure and formatting information.
+
+For more information, visit: https://github.com/xlibb/module-docreader

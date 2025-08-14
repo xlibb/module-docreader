@@ -18,4 +18,4 @@ path = "../native/build/libs/docreader-native-@project.version@.jar"
 [[platform.java21.dependency]]
 groupId = "org.apache.tika"
 artifactId = "tika-app"
-version = "3.2.2"
+version = "2.7.0"
