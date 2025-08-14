@@ -18,35 +18,9 @@ import ballerina/jballerina.java;
 
 # Parses a document file and extracts its type, extension, and content.
 #
-# This function uses Apache Tika to automatically detect the document type and extract text content
-# from various document formats including:
-# - PDF documents
-# - Microsoft Office documents (Word, Excel, PowerPoint)  
-# - OpenDocument formats (ODF)
-# - HTML and XML files
-# - Plain text files
-# - And many other formats supported by Apache Tika
-#
 # + filePath - The absolute or relative path to the document file to be parsed
 # + t - Type descriptor for the return type (optional, defaults to DocumentInfo)
 # + return - `DocumentInfo` record containing the document type, extension, and content, or `Error` on failure
-#
-# # Examples
-# ```ballerina
-# import xlibb/docreader;
-# import ballerina/io;
-#
-# public function main() returns error? {
-#     docreader:DocumentInfo|docreader:Error result = docreader:parseDocument("./document.pdf");
-#     if result is docreader:DocumentInfo {
-#         io:println("Document Type: ", result.docType);
-#         io:println("Extension: ", result.extension);
-#         io:println("Content: ", result.content);
-#     } else {
-#         io:println("Error parsing document: ", result.message());
-#     }
-# }
-# ```
-public isolated function parseDocument(string filePath, typedesc<DocumentInfo> t = <>) returns t|error = @java:Method {
+public isolated function parseDocument(string filePath, typedesc<DocumentInfo> t = <>) returns t|Error = @java:Method {
     'class: "io.xlibb.docreader.DocReader"
 } external;

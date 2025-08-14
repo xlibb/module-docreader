@@ -1,18 +1,16 @@
 # Ballerina DocReader Library
 
-[![Build](https://github.com/AzeemMuzammil/module-docreader/actions/workflows/build-timestamped-master.yml/badge.svg)](https://github.com/AzeemMuzammil/module-docreader/actions/workflows/build-timestamped-master.yml)
-[![codecov](https://codecov.io/gh/AzeemMuzammil/module-docreader/branch/main/graph/badge.svg)](https://codecov.io/gh/AzeemMuzammil/module-docreader)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/AzeemMuzammil/module-docreader.svg)](https://github.com/AzeemMuzammil/module-docreader/commits/main)
-[![Github issues](https://img.shields.io/github/issues/AzeemMuzammil/module-docreader/module/docreader.svg?label=Open%20Issues)](https://github.com/AzeemMuzammil/module-docreader/labels/module%2Fdocreader)
-[![GraalVM Check](https://github.com/AzeemMuzammil/module-docreader/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/AzeemMuzammil/module-docreader/actions/workflows/build-with-bal-test-graalvm.yml)
+[![Build](https://github.com/xlibb/module-docreader/actions/workflows/build-timestamped-master.yml/badge.svg)](https://github.com/xlibb/module-docreader/actions/workflows/build-timestamped-master.yml)
+[![codecov](https://codecov.io/gh/xlibb/module-docreader/branch/main/graph/badge.svg)](https://codecov.io/gh/xlibb/module-docreader)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/xlibb/module-docreader.svg)](https://github.com/xlibb/module-docreader/commits/main)
+[![Github issues](https://img.shields.io/github/issues/xlibb/module-docreader/module/docreader.svg?label=Open%20Issues)](https://github.com/xlibb/module-docreader/labels/module%2Fdocreader)
+[![GraalVM Check](https://github.com/xlibb/module-docreader/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/xlibb/module-docreader/actions/workflows/build-with-bal-test-graalvm.yml)
 
 ## Overview
 
-The DocReader module provides functionality for parsing various types of documentation formats. This module is designed to help with extracting and processing documentation content from different sources.
+The DocReader module provides functionality for parsing various document formats and extracting their content.
 
 ## Usage
-
-### Import the module
 
 ```ballerina
 import xlibb/docreader;

@@ -62,7 +62,7 @@ public function main() returns error? {
 function parseAndDisplayDocument(string filePath) returns error? {
     io:println(string `📖 Processing: ${filePath}`);
     
-    docreader:DocumentInfo|error result = docreader:parseDocument(filePath);
+    docreader:DocumentInfo|docreader:Error result = docreader:parseDocument(filePath);
     
     if result is docreader:DocumentInfo {
         io:println("   ✅ Successfully parsed!");
@@ -88,8 +88,8 @@ function demonstrateErrorHandling() returns error? {
     
     // Test 1: Non-existent file
     io:println("🔍 Test 1: Non-existent file");
-    docreader:DocumentInfo|error result = docreader:parseDocument("./resources/non-existent-file.txt");
-    if result is error {
+    docreader:DocumentInfo|docreader:Error result = docreader:parseDocument("./resources/non-existent-file.txt");
+    if result is docreader:Error {
         io:println(string `   ✅ Expected error caught: ${result.message()}`);
     } else {
         io:println("   ❌ Expected error but parsing succeeded");
@@ -98,7 +98,7 @@ function demonstrateErrorHandling() returns error? {
     // Test 2: Empty file path
     io:println("\n🔍 Test 2: Empty file path");
     result = docreader:parseDocument("");
-    if result is error {
+    if result is docreader:Error {
         io:println(string `   ✅ Expected error caught: ${result.message()}`);
     } else {
         io:println("   ❌ Expected error but parsing succeeded");
@@ -107,7 +107,7 @@ function demonstrateErrorHandling() returns error? {
     // Test 3: Directory instead of file
     io:println("\n🔍 Test 3: Directory path");
     result = docreader:parseDocument("./resources");
-    if result is error {
+    if result is docreader:Error {
         io:println(string `   ✅ Expected error caught: ${result.message()}`);
     } else {
         io:println("   ❌ Expected error but parsing succeeded");
@@ -125,7 +125,7 @@ function performContentAnalysis() returns error? {
     
     foreach string filePath in SAMPLE_DOCUMENTS {
         totalDocuments += 1;
-        docreader:DocumentInfo|error result = docreader:parseDocument(filePath);
+        docreader:DocumentInfo|docreader:Error result = docreader:parseDocument(filePath);
         
         if result is docreader:DocumentInfo {
             successfulParses += 1;

@@ -21,9 +21,9 @@ package io.xlibb.docreader;
 /**
  * Java record representing document information.
  *
- * @param docType   the MIME type of the document
+ * @param docType   the MIME type
  * @param extension the file extension
- * @param content   the extracted text content
+ * @param content   the extracted content
  */
 public record DocumentInfo(String docType, String extension, String content) {
 }

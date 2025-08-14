@@ -43,10 +43,7 @@ import java.nio.file.Paths;
 import java.util.Locale;
 
 /**
- * Document reader implementation using Apache Tika for extracting document information.
- *
- * This class provides functionality to read various document formats and extract
- * their content, type, and metadata using Apache Tika's AutoDetectParser.
+ * Document reader implementation using Apache Tika.
  */
 public class DocReader {
 
@@ -54,10 +51,6 @@ public class DocReader {
 
     /**
      * Parses a document file and extracts its type, extension, and content.
-     *
-     * @param filePath the path to the document file as BString
-     * @param typed the type descriptor for the return type
-     * @return BMap containing the parsed DocumentInfo or BError on failure
      */
     public static Object parseDocument(BString filePath, BTypedesc typed) {
         try {
@@ -89,12 +82,6 @@ public class DocReader {
         }
     }
 
-    /**
-     * Extracts the file extension from a file.
-     *
-     * @param file the file to extract extension from
-     * @return the file extension in lowercase, or empty string if no extension
-     */
     private static String extractFileExtension(File file) {
         Path path = Paths.get(file.getAbsolutePath());
         Path fileNamePath = path.getFileName();
@@ -109,22 +96,12 @@ public class DocReader {
         return "";
     }
 
-    /**
-     * Extracts content from a document file using Apache Tika's AutoDetectParser.
-     *
-     * @param file the file to extract content from
-     * @return the extracted text content
-     * @throws IOException if an I/O error occurs
-     * @throws TikaException if a parsing error occurs
-     * @throws SAXException if an XML parsing error occurs
-     */
     private static String extractContent(File file) throws IOException, TikaException, SAXException {
-        BodyContentHandler handler = new BodyContentHandler(-1);  // No content length limit
+        BodyContentHandler handler = new BodyContentHandler(-1);
         AutoDetectParser parser = new AutoDetectParser();
         Metadata metadata = new Metadata();
         ParseContext context = new ParseContext();
 
-        // Configure PDF parsing
         PDFParserConfig pdfConfig = new PDFParserConfig();
         pdfConfig.setExtractInlineImages(false);
         pdfConfig.setExtractUniqueInlineImagesOnly(true);
@@ -136,15 +113,6 @@ public class DocReader {
         }
     }
 
-    /**
-     * Creates a Ballerina DocumentInfo record from the extracted information.
-     *
-     * @param docType the MIME type of the document
-     * @param extension the file extension
-     * @param content the extracted content
-     * @param typed the type descriptor for the return type
-     * @return BMap representing the DocumentInfo record
-     */
     private static BMap<BString, Object> createDocumentInfo(String docType, String extension, 
             String content, BTypedesc typed) {
         DocumentInfo docInfo = new DocumentInfo(
@@ -162,12 +130,6 @@ public class DocReader {
         return documentInfo;
     }
 
-    /**
-     * Creates a Ballerina error with the specified message.
-     *
-     * @param message the error message
-     * @return BError representing the DocReaderError
-     */
     private static BError createError(String message) {
         return ErrorCreator.createError(
             StringUtils.fromString("DocReaderError"), 
