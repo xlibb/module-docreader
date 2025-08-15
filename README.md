@@ -14,7 +14,41 @@ The DocReader module provides functionality for parsing various document formats
 
 ```ballerina
 import xlibb/docreader;
+import ballerina/io;
+
+public function main() returns error? {
+    // Read a document file
+    docreader:DocumentInfo|docreader:Error result = docreader:readDocument("./sample.pdf");
+    
+    if result is docreader:DocumentInfo {
+        io:println("MIME Type: ", result.mimeType);
+        io:println("Extension: ", result.extension);
+        io:println("Content: ", result.content);
+    } else {
+        io:println("Error: ", result.message());
+    }
+}
 ```
+
+### Supported Document Formats
+
+The library supports various file types including TXT, DOCX, PDF, XLS, PPT, HTML, CSV, XML, JSON, and RTF.
+
+### API Reference
+
+#### `readDocument(string filePath) returns DocumentInfo|Error`
+
+Reads a document file and extracts its metadata and content.
+
+**Parameters:**
+- `filePath` - The absolute or relative path to the document file
+
+**Returns:**
+- `DocumentInfo` - A record containing:
+  - `mimeType` - The MIME type of the document
+  - `extension` - The file extension without the dot
+  - `content` - The extracted text content
+- `Error` - If the file cannot be read or parsed
 
 ## Build from the source
 

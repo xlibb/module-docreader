@@ -1,6 +1,6 @@
-// Copyright (c) 2025, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
 //
-// WSO2 Inc. licenses this file to you under the Apache License,
+// WSO2 LLC. licenses this file to you under the Apache License,
 // Version 2.0 (the "License"); you may not use this file except
 // in compliance with the License.
 // You may obtain a copy of the License at
@@ -16,11 +16,11 @@
 
 import ballerina/jballerina.java;
 
-# Parses a document file and extracts its type, extension, and content.
+# Reads a document file and extracts its MIME type, extension, and content.
 #
-# + filePath - The absolute or relative path to the document file to be parsed
-# + t - Type descriptor for the return type (optional, defaults to DocumentInfo)
-# + return - `DocumentInfo` record containing the document type, extension, and content, or `Error` on failure
-public isolated function parseDocument(string filePath, typedesc<DocumentInfo> t = <>) returns t|Error = @java:Method {
+# + filePath - The absolute or relative path to the document file to be read
+# + return - `DocumentInfo` record containing the MIME type, extension, and content, or `Error` on failure
+public isolated function readDocument(@display {label: "File Path"} string filePath)
+        returns DocumentInfo|Error = @java:Method {
     'class: "io.xlibb.docreader.DocReader"
 } external;

@@ -1,6 +1,6 @@
-// Copyright (c) 2025, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
 //
-// WSO2 Inc. licenses this file to you under the Apache License,
+// WSO2 LLC. licenses this file to you under the Apache License,
 // Version 2.0 (the "License"); you may not use this file except
 // in compliance with the License.
 // You may obtain a copy of the License at
@@ -16,9 +16,9 @@
 
 # Represents document information extracted from a file.
 public type DocumentInfo record {|
-    # The MIME type of the document (e.g., "application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "text/plain")
-    string docType;
-    # The file extension without the dot (e.g., "pdf", "docx", "txt")
+    # The MIME type of the document
+    string mimeType;
+    # The file extension
     string extension;
     # The extracted text content from the document
     string content;

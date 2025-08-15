@@ -1,6 +1,6 @@
-// Copyright (c) 2025, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
 //
-// WSO2 Inc. licenses this file to you under the Apache License,
+// WSO2 LLC. licenses this file to you under the Apache License,
 // Version 2.0 (the "License"); you may not use this file except
 // in compliance with the License.
 // You may obtain a copy of the License at
@@ -58,15 +58,15 @@ public function main() returns error? {
     io:println("=========================================");
 }
 
-// Parse and display information about a document
+// Read and display information about a document
 function parseAndDisplayDocument(string filePath) returns error? {
     io:println(string `📖 Processing: ${filePath}`);
     
-    docreader:DocumentInfo|docreader:Error result = docreader:parseDocument(filePath);
+    docreader:DocumentInfo|docreader:Error result = docreader:readDocument(filePath);
     
     if result is docreader:DocumentInfo {
         io:println("   ✅ Successfully parsed!");
-        io:println(string `   📋 Document Type: ${result.docType}`);
+        io:println(string `   📋 MIME Type: ${result.mimeType}`);
         io:println(string `   🏷️  Extension: ${result.extension}`);
         io:println(string `   📏 Content Length: ${result.content.length()} characters`);
         
@@ -88,7 +88,7 @@ function demonstrateErrorHandling() returns error? {
     
     // Test 1: Non-existent file
     io:println("🔍 Test 1: Non-existent file");
-    docreader:DocumentInfo|docreader:Error result = docreader:parseDocument("./resources/non-existent-file.txt");
+    docreader:DocumentInfo|docreader:Error result = docreader:readDocument("./resources/non-existent-file.txt");
     if result is docreader:Error {
         io:println(string `   ✅ Expected error caught: ${result.message()}`);
     } else {
@@ -97,7 +97,7 @@ function demonstrateErrorHandling() returns error? {
     
     // Test 2: Empty file path
     io:println("\n🔍 Test 2: Empty file path");
-    result = docreader:parseDocument("");
+    result = docreader:readDocument("");
     if result is docreader:Error {
         io:println(string `   ✅ Expected error caught: ${result.message()}`);
     } else {
@@ -106,7 +106,7 @@ function demonstrateErrorHandling() returns error? {
     
     // Test 3: Directory instead of file
     io:println("\n🔍 Test 3: Directory path");
-    result = docreader:parseDocument("./resources");
+    result = docreader:readDocument("./resources");
     if result is docreader:Error {
         io:println(string `   ✅ Expected error caught: ${result.message()}`);
     } else {
@@ -125,7 +125,7 @@ function performContentAnalysis() returns error? {
     
     foreach string filePath in SAMPLE_DOCUMENTS {
         totalDocuments += 1;
-        docreader:DocumentInfo|docreader:Error result = docreader:parseDocument(filePath);
+        docreader:DocumentInfo|docreader:Error result = docreader:readDocument(filePath);
         
         if result is docreader:DocumentInfo {
             successfulParses += 1;

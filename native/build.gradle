@@ -1,6 +1,6 @@
-// Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
 //
-// WSO2 Inc. licenses this file to you under the Apache License,
+// WSO2 LLC. licenses this file to you under the Apache License,
 // Version 2.0 (the "License"); you may not use this file except
 // in compliance with the License.
 // You may obtain a copy of the License at
@@ -24,15 +24,12 @@ dependencies {
     checkstyle project(':checkstyle')
     checkstyle "com.puppycrawl.tools:checkstyle:${checkstylePluginVersion}"
     
-    // Tika BOM for proper dependency management
-    implementation platform("org.apache.tika:tika-bom:${tikaVersion}")
-    
     implementation group: 'org.ballerinalang', name: 'ballerina-lang', version: "${ballerinaLangVersion}"
     implementation group: 'org.ballerinalang', name: 'ballerina-runtime', version: "${ballerinaLangVersion}"
     
     // Apache Tika for document parsing (versions managed by BOM)
-    implementation "org.apache.tika:tika-core"
-    implementation "org.apache.tika:tika-parsers-standard-package"
+    implementation group: 'org.apache.tika', name: 'tika-core', version: "${tikaVersion}"
+    implementation group: 'org.apache.tika', name: 'tika-parsers-standard-package', version: "${tikaVersion}"
 }
 
 def excludePattern = '**/module-info.java'

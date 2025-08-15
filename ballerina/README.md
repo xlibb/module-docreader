@@ -1,21 +1,10 @@
 # Ballerina DocReader Library
 
-A Ballerina library for reading documents using Apache Tika.
+A Ballerina library for reading various document formats and extracting their content using Apache Tika.
 
 ## Overview
 
-The DocReader library leverages Apache Tika to parse and extract information from various document formats.
-
-## Installation
-
-Add the dependency to your `Ballerina.toml` file:
-
-```toml
-[dependency]
-org = "xlibb"
-name = "docreader"
-version = "0.1.0"
-```
+The DocReader library leverages Apache Tika to parse and extract information from various document formats including TXT, DOCX, PDF, XLS, PPT, HTML, CSV, XML, JSON, and RTF.
 
 ## Usage
 
@@ -24,10 +13,11 @@ import xlibb/docreader;
 import ballerina/io;
 
 public function main() returns error? {
-    docreader:DocumentInfo|docreader:Error result = docreader:parseDocument("./document.pdf");
+    // Read a document file and extract its content
+    docreader:DocumentInfo|docreader:Error result = docreader:readDocument("./document.pdf");
     
     if result is docreader:DocumentInfo {
-        io:println("Document Type: ", result.docType);
+        io:println("MIME Type: ", result.mimeType);
         io:println("Extension: ", result.extension);
         io:println("Content: ", result.content);
     } else {
@@ -35,6 +25,19 @@ public function main() returns error? {
     }
 }
 ```
+
+### API
+
+#### `readDocument(string filePath) returns DocumentInfo|Error`
+
+Reads a document file and extracts its type, extension, and content.
+
+**Parameters:**
+- `filePath` - The absolute or relative path to the document file
+
+**Returns:**
+- `DocumentInfo` record with `mimeType`, `extension`, and `content` fields
+- `Error` if the file cannot be read or parsed
 
 ## Building from Source
 

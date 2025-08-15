@@ -8,7 +8,6 @@ A demonstration of the Ballerina DocReader library for parsing various document 
 document-reading-demo/
 ├── main.bal         # Main demonstration program
 ├── Ballerina.toml   # Project configuration
-├── Dependencies.toml # Dependency lock file
 └── resources/       # Sample documents (10 formats)
 ```
 
@@ -25,16 +24,32 @@ bal run
 - Error handling examples
 - Content analysis
 
-## Usage Example
+## Usage Examples
+
+### Basic Document Reading
 
 ```ballerina
 import xlibb/docreader;
+import ballerina/io;
 
-docreader:DocumentInfo|docreader:Error result = docreader:parseDocument("./resources/sample.pdf");
+public function main() returns error? {
+    docreader:DocumentInfo|docreader:Error result = docreader:readDocument("./resources/sample.pdf");
 
-if result is docreader:DocumentInfo {
-    // Process document info
-} else {
-    // Handle error
+    if result is docreader:DocumentInfo {
+        io:println("MIME Type: ", result.mimeType);
+        io:println("Extension: ", result.extension);
+        io:println("Content Length: ", result.content.length());
+    } else {
+        io:println("Error: ", result.message());
+    }
+}
+```
+
+### Error Handling
+
+```ballerina
+docreader:DocumentInfo|docreader:Error result = docreader:readDocument("./non-existent.txt");
+if result is docreader:Error {
+    io:println("Failed to read document: ", result.message());
 }
 ```

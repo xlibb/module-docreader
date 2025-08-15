@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
+ * Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -20,6 +20,10 @@ package io.xlibb.docreader;
 
 import io.ballerina.runtime.api.Environment;
 import io.ballerina.runtime.api.Module;
+import io.ballerina.runtime.api.creators.ErrorCreator;
+import io.ballerina.runtime.api.values.BError;
+
+import static io.ballerina.runtime.api.utils.StringUtils.fromString;
 
 public final class ModuleUtils {
     private static Module module;
@@ -35,5 +39,9 @@ public final class ModuleUtils {
     @SuppressWarnings("unused")
     public static void setModule(Environment env) {
         module = env.getCurrentModule();
+    }
+
+    public static BError createError(String errorMessage) {
+        return ErrorCreator.createError(fromString(errorMessage));
     }
 }
