@@ -29,6 +29,7 @@ import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.microsoft.OfficeParserConfig;
 import org.apache.tika.parser.pdf.PDFParserConfig;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
@@ -46,13 +47,13 @@ import static io.xlibb.docreader.ModuleUtils.createError;
  * Document reader implementation using Apache Tika.
  */
 public class DocReader {
-
-    private static final Tika tika = new Tika();
     private static final String MIME_TYPE_FIELD = "mimeType";
     private static final String EXTENSION_FIELD = "extension";
     private static final String CONTENT_FIELD = "content";
     private static final String DEFAULT_MIME_TYPE = "application/octet-stream";
     private static final String DOCUMENT_INFO_RECORD = "DocumentInfo";
+
+    private static final Tika tika = new Tika();
 
     /**
      * Reads a document file and extracts its MIME type, extension, and content.
@@ -110,10 +111,20 @@ public class DocReader {
         Metadata metadata = new Metadata();
         ParseContext context = new ParseContext();
 
+        // Configure PDF parser
         PDFParserConfig pdfConfig = new PDFParserConfig();
         pdfConfig.setExtractInlineImages(false);
         pdfConfig.setExtractUniqueInlineImagesOnly(true);
         context.set(PDFParserConfig.class, pdfConfig);
+
+        // Configure Office parser (PowerPoint, Word, Excel)
+        OfficeParserConfig officeConfig = new OfficeParserConfig();
+        officeConfig.setUseSAXDocxExtractor(true);
+        officeConfig.setUseSAXPptxExtractor(true);
+        officeConfig.setIncludeDeletedContent(false);
+        officeConfig.setIncludeMoveFromContent(false);
+        officeConfig.setExtractMacros(false);
+        context.set(OfficeParserConfig.class, officeConfig);
 
         try (FileInputStream inputStream = new FileInputStream(file)) {
             parser.parse(inputStream, handler, metadata, context);

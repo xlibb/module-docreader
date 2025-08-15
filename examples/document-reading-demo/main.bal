@@ -15,15 +15,16 @@
 // under the License.
 
 import ballerina/io;
+
 import xlibb/docreader;
 
 // Sample documents for testing different formats
 final string[] SAMPLE_DOCUMENTS = [
     "./resources/sample.txt",
-    "./resources/sample.docx", 
+    "./resources/sample.docx",
     "./resources/sample.pdf",
     "./resources/sample.xls",
-    "./resources/sample.ppt",
+    "./resources/sample.pptx",
     "./resources/sample.html",
     "./resources/sample.csv",
     "./resources/sample.xml",
@@ -38,7 +39,7 @@ public function main() returns error? {
     // Demo 1: Parse multiple document formats
     io:println("📄 Demo 1: Multi-Format Document Parsing");
     io:println("-----------------------------------------");
-    
+
     foreach string filePath in SAMPLE_DOCUMENTS {
         check parseAndDisplayDocument(filePath);
         io:println(); // Add spacing between documents
@@ -61,22 +62,22 @@ public function main() returns error? {
 // Read and display information about a document
 function parseAndDisplayDocument(string filePath) returns error? {
     io:println(string `📖 Processing: ${filePath}`);
-    
+
     docreader:DocumentInfo|docreader:Error result = docreader:readDocument(filePath);
-    
+
     if result is docreader:DocumentInfo {
         io:println("   ✅ Successfully parsed!");
         io:println(string `   📋 MIME Type: ${result.mimeType}`);
         io:println(string `   🏷️  Extension: ${result.extension}`);
         io:println(string `   📏 Content Length: ${result.content.length()} characters`);
-        
+
         // Show content preview (first 200 characters)
-        string preview = result.content.length() > 200 ? 
-            result.content.substring(0, 200) + "..." : 
+        string preview = result.content.length() > 200 ?
+            result.content.substring(0, 200) + "..." :
             result.content;
         io:println("   📄 Content Preview:");
         io:println(string `   "${preview.trim()}"`);
-        
+
     } else {
         io:println(string `   ❌ Failed to parse: ${result.message()}`);
     }
@@ -85,7 +86,7 @@ function parseAndDisplayDocument(string filePath) returns error? {
 // Demonstrate error handling scenarios
 function demonstrateErrorHandling() returns error? {
     io:println("Testing error scenarios...\n");
-    
+
     // Test 1: Non-existent file
     io:println("🔍 Test 1: Non-existent file");
     docreader:DocumentInfo|docreader:Error result = docreader:readDocument("./resources/non-existent-file.txt");
@@ -94,7 +95,7 @@ function demonstrateErrorHandling() returns error? {
     } else {
         io:println("   ❌ Expected error but parsing succeeded");
     }
-    
+
     // Test 2: Empty file path
     io:println("\n🔍 Test 2: Empty file path");
     result = docreader:readDocument("");
@@ -103,7 +104,7 @@ function demonstrateErrorHandling() returns error? {
     } else {
         io:println("   ❌ Expected error but parsing succeeded");
     }
-    
+
     // Test 3: Directory instead of file
     io:println("\n🔍 Test 3: Directory path");
     result = docreader:readDocument("./resources");
@@ -117,41 +118,41 @@ function demonstrateErrorHandling() returns error? {
 // Perform content analysis on parsed documents
 function performContentAnalysis() returns error? {
     io:println("Analyzing document characteristics...\n");
-    
+
     map<int> formatCounts = {};
     map<int> contentLengths = {};
     int totalDocuments = 0;
     int successfulParses = 0;
-    
+
     foreach string filePath in SAMPLE_DOCUMENTS {
         totalDocuments += 1;
         docreader:DocumentInfo|docreader:Error result = docreader:readDocument(filePath);
-        
+
         if result is docreader:DocumentInfo {
             successfulParses += 1;
-            
+
             // Count by file extension
             string ext = result.extension == "" ? "no-extension" : result.extension;
             formatCounts[ext] = (formatCounts[ext] ?: 0) + 1;
-            
+
             // Track content lengths
             string lengthCategory = categorizeContentLength(result.content.length());
             contentLengths[lengthCategory] = (contentLengths[lengthCategory] ?: 0) + 1;
         }
     }
-    
+
     // Display analysis results
     io:println("📈 Analysis Results:");
     io:println(string `   📊 Total Documents: ${totalDocuments}`);
     io:println(string `   ✅ Successfully Parsed: ${successfulParses}`);
     io:println(string `   📉 Parse Success Rate: ${(successfulParses * 100 / totalDocuments)}%`);
-    
+
     io:println("\n📋 Format Distribution:");
     foreach string format in formatCounts.keys() {
         int count = formatCounts[format] ?: 0;
         io:println(string `   ${format.toUpperAscii()}: ${count} document(s)`);
     }
-    
+
     io:println("\n📏 Content Length Distribution:");
     foreach string category in contentLengths.keys() {
         int count = contentLengths[category] ?: 0;

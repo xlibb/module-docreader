@@ -26,6 +26,8 @@ import io.ballerina.runtime.api.values.BError;
 import static io.ballerina.runtime.api.utils.StringUtils.fromString;
 
 public final class ModuleUtils {
+    private static final String ERROR_TYPE_NAME = "Error";
+
     private static Module module;
 
     private ModuleUtils() {
@@ -42,6 +44,7 @@ public final class ModuleUtils {
     }
 
     public static BError createError(String errorMessage) {
-        return ErrorCreator.createError(fromString(errorMessage));
+        return ErrorCreator.createError(
+                ModuleUtils.getModule(), ERROR_TYPE_NAME, fromString(errorMessage), null, null);
     }
 }
