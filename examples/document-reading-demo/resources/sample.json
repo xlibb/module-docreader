@@ -1,0 +1,31 @@
+{
+  "library": {
+    "name": "DocReader",
+    "version": "0.1.0",
+    "description": "A Ballerina library for document reading and parsing",
+    "features": [
+      "Multi-format document support",
+      "Apache Tika integration",
+      "Content extraction",
+      "Metadata retrieval"
+    ],
+    "supportedFormats": [
+      "PDF",
+      "Microsoft Office (DOCX, XLSX, PPTX)",
+      "HTML",
+      "XML",
+      "CSV",
+      "Plain Text",
+      "RTF"
+    ],
+    "usage": {
+      "basic": "docreader:parseDocument(filePath)",
+      "errorHandling": "Check for Error types in result"
+    },
+    "metadata": {
+      "author": "xlibb",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/xlibb/module-docreader"
+    }
+  }
+}

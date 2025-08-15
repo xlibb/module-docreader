@@ -1,0 +1,20 @@
+[package]
+org = "xlibb"
+name = "docreader"
+version = "@toml.version@"
+authors = ["xlibb"]
+keywords = ["docreader", "documentation", "reader", "parser"]
+repository = "https://github.com/xlibb/module-docreader"
+license = ["Apache-2.0"]
+distribution = "2201.12.0"
+
+[[platform.java21.dependency]]
+groupId = "io.xlibb.docreader"
+artifactId = "docreader-native"
+version = "@toml.version@"
+path = "../native/build/libs/docreader-native-@project.version@.jar"
+
+[[platform.java21.dependency]]
+groupId = "org.apache.tika"
+artifactId = "tika-app"
+version = "2.7.0"
